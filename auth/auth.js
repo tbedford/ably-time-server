@@ -27,7 +27,7 @@ function generateToken(req, res) {
   tokenParams["ttl"] = ttl;
 
   if (req.params["clientId"]) {
-    clientId = req.params["clientId"];
+    const clientId = req.params["clientId"];
     console.log(`clientId: ${clientId}`);
     tokenParams["clientId"] = clientId;
   }

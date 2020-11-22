@@ -1,5 +1,4 @@
 var auth_url = "http://localhost:9000/auth";
-//const auth_url = 'https://flawless-buttery-legal.glitch.me/auth' < didn't work.
 
 clientId = "someClientId";
 auth_url = auth_url + '/' + clientId;
