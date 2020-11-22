@@ -11,7 +11,7 @@ const channel = ably.channels.get('time-server');
 function doTime(){
     const time = new Date();
     console.log(`Time on server is: ${time}`);
-    channel.publish('time-server', time.toString());
+    channel.publish('time', time.toString());
     return;
 }
 
