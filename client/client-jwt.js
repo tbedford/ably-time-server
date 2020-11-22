@@ -1,11 +1,8 @@
-// simple client that uses TokenRequest for authentication
-var auth_url = "http://localhost:9000/auth";
-clientId = "TonyB";
-auth_url = auth_url + '/' + clientId;
+// A simple client that uses JWTs for authentication
 
-const ably = new require("ably").Realtime({ authUrl: auth_url, clientId: clientId });
+var auth_url = "http://localhost:9000/jwt";
+const ably = new require("ably").Realtime({ authUrl: auth_url });
 
-// Monitor connection state
 ably.connection.on("connecting", function () {
   console.log("Connecting to Ably...");
 });
@@ -24,5 +21,3 @@ const channel = ably.channels.get("time-server");
 channel.subscribe("time", function (message) {
   console.log("Time on server is: " + message.data);
 });
-
-channel.presence.enter();

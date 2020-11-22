@@ -19,4 +19,9 @@ function doTime() {
 setInterval(doTime, timeout);
 console.log("Hello");
 
-// TODO: check for clients
+channel.presence.subscribe('enter', function(member) {
+  console.log('Member ' + member.clientId + ' entered');
+});
+
+
+
