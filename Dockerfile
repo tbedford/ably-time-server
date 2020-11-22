@@ -1,7 +1,7 @@
 FROM node:15
-WORKDIR /home/node/app
-COPY app /home/node/app
+WORKDIR /home/node/server
+COPY app /home/node/server
 RUN npm install
-CMD npm run app
-EXPOSE 9999
+CMD npm run server
+EXPOSE 3000
 
