@@ -1,4 +1,4 @@
-# ably-sample-code
+# ably simple time server
 
 Just a workspace for me to test out Ably realtime
 
