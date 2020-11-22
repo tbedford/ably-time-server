@@ -1,17 +1,18 @@
-
 // simple client that uses TokenRequest for authentication
 var auth_url = "http://localhost:9000/auth";
 
-if (process.argv.length < 3)
-{
-  console.log("You must enter a clientId")
-  exit(-1);
+if (process.argv.length < 3) {
+  console.log("You must enter a clientId");
+  process.exit(-1);
 }
 
 clientId = process.argv[2];
-auth_url = auth_url + '/' + clientId;
+auth_url = auth_url + "/" + clientId;
 
-const ably = new require("ably").Realtime({ authUrl: auth_url, clientId: clientId });
+const ably = new require("ably").Realtime({
+  authUrl: auth_url,
+  clientId: clientId,
+});
 
 // Monitor connection state
 ably.connection.on("connecting", function () {
@@ -33,8 +34,8 @@ channel.subscribe("time", function (message) {
   console.log("Time on server is: " + message.data);
 });
 
-channel.presence.subscribe('enter', function(member) {
-  console.log('Member ' + member.clientId + ' entered');
+channel.presence.subscribe("enter", function (member) {
+  console.log("Member " + member.clientId + " entered");
 });
 
 channel.presence.enter();

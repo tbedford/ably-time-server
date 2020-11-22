@@ -1,6 +1,6 @@
 // A simple client that uses JWTs for authentication
 
-var auth_url = "http://localhost:9000/jwt";
+var auth_url = "http://localhost:8000/jwt";
 const ably = new require("ably").Realtime({ authUrl: auth_url });
 
 ably.connection.on("connecting", function () {
