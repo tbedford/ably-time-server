@@ -1,7 +1,10 @@
+/*
 var auth_url = "http://localhost:9000/auth";
-
 clientId = "someClientId";
 auth_url = auth_url + '/' + clientId;
+*/
+
+var auth_url = "http://localhost:9000/jwt";
 
 const ably = new require("ably").Realtime({ authUrl: auth_url });
 
