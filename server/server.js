@@ -18,10 +18,3 @@ function doTime() {
 
 setInterval(doTime, timeout);
 console.log("Hello");
-
-channel.presence.subscribe('enter', function(member) {
-  console.log('Member ' + member.clientId + ' entered');
-});
-
-
-
