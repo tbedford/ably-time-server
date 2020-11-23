@@ -23,9 +23,11 @@ const req = https.request(options, (res) => {
 
   res.on("data", (d) => {
     jwt = d.toString();
+    jwt = JSON.parse(jwt);   // Must be in JSON
     console.log(jwt);
 
     const ably = new require("ably").Realtime(jwt);
+//    const ably = new require("ably").Realtime({authUrl: auth_url});
 
     ably.connection.on("connecting", function () {
       console.log("Connecting to Ably...");
