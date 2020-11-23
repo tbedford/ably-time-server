@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="//cdn.ably.io/lib/ably.min-1.js"></script>
+</head>
+
+<body>
+    <h1>Ably test</h1>
+    <p id="status">Hello</p>
+    <hr />
+    <p id="time">Hello</p>
+    <script>
+        const ably = new Ably.Realtime({ authUrl: "http://localhost:9000/auth" });
+        ably.connection.on("connected", function () {
+            const msg = "Connected to Ably using Auth server.";
+            console.log(msg);
+            document.getElementById("status").innerHTML = msg;
+        });
+        const channel = ably.channels.get("time-server");
+        channel.subscribe("time", function (message) {
+            console.log(message.data);
+            document.getElementById("time").innerHTML = message.data;
+        });
+    </script>
+</body>
+
+</html>
