@@ -48,6 +48,7 @@ function genAblyJWT(req, res) {
   res.setHeader("Content-Type", "application/json");
   jwt = JSON.stringify(ablyJwt);
   console.log(jwt);
+  res.setHeader("Content-Type", "application/json");
   res.send(jwt);
 }
 
