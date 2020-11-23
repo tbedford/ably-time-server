@@ -46,13 +46,14 @@ function genAblyJWT(req, res) {
   const ablyJwt = token + "." + signature;
 
   res.setHeader("Content-Type", "application/json");
-  jwt = JSON.stringify(ablyJwt);
+  const jwt = JSON.stringify(ablyJwt);
   console.log(jwt);
   res.setHeader("Content-Type", "application/json");
   res.send(jwt);
 }
 
 function b64(token) {
+  var encode;
   encode = CryptoJS.enc.Base64.stringify(token);
   encode = encode.replace(/\=+$/, "");
   encode = encode.replace(/\+/g, "-");

@@ -6,7 +6,7 @@ if (process.argv.length < 3) {
   process.exit(-1);
 }
 
-clientId = process.argv[2];
+const clientId = process.argv[2];
 auth_url = auth_url + "/" + clientId;
 
 const ably = new require("ably").Realtime({

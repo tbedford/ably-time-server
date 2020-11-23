@@ -3,6 +3,8 @@
 const https = require("https");
 const { exit } = require("process");
 
+const auth_url = "https://flawless-buttery-legal.glitch.me/jwt"
+
 var jwt = null;
 
 const options = {
