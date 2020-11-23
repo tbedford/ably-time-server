@@ -23,7 +23,9 @@ const req = https.request(options, (res) => {
 
   res.on("data", (d) => {
     jwt = d.toString();
-    jwt = JSON.parse(jwt);   // Must be in JSON
+    console.log(`Type of JWT before JSON.parse: ${typeof(jwt)}`);
+    jwt = JSON.parse(jwt);   // Must do this otherwise we have extra double quote marks!
+    console.log(`Type of JWT: ${typeof(jwt)}`);
     console.log(jwt);
 
     const ably = new require("ably").Realtime(jwt);
