@@ -3,7 +3,6 @@ const auth_url = "https://flawless-buttery-legal.glitch.me/auth";
 
 var ably = new Ably.Realtime({authUrl: auth_url});
 
-// Monitor connection state
 ably.connection.on("connecting", function () {
   console.log("Connecting to Ably...");
 });
