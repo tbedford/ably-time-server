@@ -23,6 +23,7 @@ app.route("/jwt").get(genAblyJWT);
 function genAblyJWT(req, res) {
   console.log("Generating Ably JWT...");
 
+  // JWT header
   const header = {
     typ: "JWT",
     alg: "HS256",
@@ -31,6 +32,7 @@ function genAblyJWT(req, res) {
 
   const currentTime = Math.round(Date.now() / 1000);
 
+  // JWT payload
   const claims = {
     iat: currentTime /* current time in seconds */,
     exp: currentTime + parseInt(exp) /* time of expiration in seconds */,
@@ -41,8 +43,7 @@ function genAblyJWT(req, res) {
   const base64Claims = b64(CryptoJS.enc.Utf8.parse(JSON.stringify(claims)));
   const token = base64Header + "." + base64Claims;
 
-  /* Apply the hash specified in the header */
-  const signature = b64(CryptoJS.HmacSHA256(token, secret));
+  const signature = b64(CryptoJS.HmacSHA256(token, secret)); // create signature by signing token
   const ablyJwt = token + "." + signature;
 
   res.setHeader("Content-Type", "application/json");
@@ -52,6 +53,7 @@ function genAblyJWT(req, res) {
   res.send(jwt);
 }
 
+// Base64Url encoding
 function b64(token) {
   var encode;
   encode = CryptoJS.enc.Base64.stringify(token);
