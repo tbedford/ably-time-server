@@ -53,6 +53,8 @@ async function executeGetJWT() {
   try {
     const n = await getJWT();
     console.log(n);
+    ably(n);
+
   } catch (e) {
     console.error(`Failed: ${e}`);
   } finally {
@@ -60,6 +62,20 @@ async function executeGetJWT() {
   }
 }
 
-const j = executeGetJWT()
+executeGetJWT()
 
-const ably = new require("ably").Realtime(j);
+function ably(x) {
+
+  const ably = new require("ably").Realtime(x);
+
+  ably.connection.on("connecting", function () {
+    console.log("Connecting to Ably...");
+  });
+  
+  ably.connection.on("connected", function () {
+    console.log("Connected");
+  });
+
+  // Do stuff
+
+}
