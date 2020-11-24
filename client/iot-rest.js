@@ -1,10 +1,7 @@
 // A simple IoT client that uses JWTs for authentication
 
 const https = require("https");
-const { exit } = require("process");
 const Ably = require("ably");
-
-const auth_url = "https://flawless-buttery-legal.glitch.me/jwt";
 
 var jwt = null;
 
@@ -28,7 +25,6 @@ const req = https.request(options, (res) => {
     console.log(jwt);
 
     var rest = new Ably.Rest(jwt);
-    var channel = rest.channels.get("time-server");
 
     rest.stats({ unit: "hour" }, function (err, resultPage) {
       var thisHour = resultPage.items[0];
