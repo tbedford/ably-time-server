@@ -7,7 +7,7 @@ require("dotenv").config({
 const key = process.env.API_KEY;
 const secret = process.env.API_SECRET;
 const token = process.env.TOKEN;
-const city = "manila";
+const city = "london";
 
 const options = {
   hostname: "api.waqi.info",
@@ -49,9 +49,9 @@ function getAQI() {
 
 async function executeGetAQI() {
   try {
-    const n = await getAQI();
-    console.log(n);
-    channel.publish("london-waqi", n);
+    var aqi = await getAQI();
+    console.log(aqi);
+    channel.publish("london-waqi", aqi);
   } catch (e) {
     console.error(`Failed: ${e}`);
   } finally {
