@@ -1,7 +1,7 @@
 import os
 import re
 
-root_dir = "/Users/tbedford/checkouts/docs/content"
+root_dir = "/Users/tbedford/link-repl/docs/content"
 redirects_file = "/Users/tbedford/Downloads/redirects.tsv"
 
 def open_log (filename):
@@ -54,14 +54,17 @@ print("Items in link_array: %d" % (i))
 # Replace in files
 files = find_files(root_dir)
 for f in files:
-    source = read_file(f)
+    source1 = read_file(f)
+    source = source1
     for link in link_array:
-        matches = re.findall(link[0], source)
-        if len(matches) > 0: 
-            source = source.replace(link[0], link[1])
+        regex = r'([\s.,])'
+        link0 = '(' + re.escape(link[0]) + ')' + regex
+        source = re.sub(link0, link[1] + r'\2', source, re.MULTILINE)
+        if source != source1:
+            #print("Replacing: %s %s" % (link[0], link[1]))
             write_log(logfile, f, link[0], link[1])
     print("----------")
     # write source out to file
-    # write_file(f, source)
+    write_file(f, source)
 
 close_log(logfile)
