@@ -13,10 +13,11 @@ def close_log (f):
     print("Closing log file")
     f.close()
 
-def write_log(f, filename, link1, link2):
-    msg = "{%s} -- {%s} -- {%s}\n" % (filename, link1, link2)
+def write_log(f, msg):
+    msg = msg + '\n'
     f.write(msg)
     f.flush()
+    return
 
 def find_files(root):
     md_files = []
@@ -54,17 +55,19 @@ print("Items in link_array: %d" % (i))
 # Replace in files
 files = find_files(root_dir)
 for f in files:
-    source1 = read_file(f)
-    source = source1
+    write_log(logfile, '====  ' + f + '  ====>')
+    source = read_file(f)
+    source_in = source
     for link in link_array:
-        regex = r'([\s.,])'
+        regex = r'([\s.,*<:)])'
         link0 = '(' + re.escape(link[0]) + ')' + regex
-        source = re.sub(link0, link[1] + r'\2', source, re.MULTILINE)
-        if source != source1:
-            #print("Replacing: %s %s" % (link[0], link[1]))
-            write_log(logfile, f, link[0], link[1])
+        source_out = re.sub(link0, link[1] + r'\2', source_in, re.MULTILINE)
+        if source_in != source_out:  # we have made a replacement
+            msg = "{%s} -- {%s}" % (link[0], link[1])
+            write_log(logfile, msg)
+        source_in = source_out
     print("----------")
     # write source out to file
-    write_file(f, source)
+    write_file(f, source_out)
 
 close_log(logfile)
