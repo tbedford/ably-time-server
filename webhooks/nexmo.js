@@ -13,7 +13,7 @@ ably.connection.on('connected', function() {
 
 var channel = ably.channels.get('webhook-test');
 
-channel.subscribe(function(message) {
+channel.subscribe((message) => {
     console.log(JSON.stringify(message.data, null, 3));
     console.log("------------------------------------------------")
 });
