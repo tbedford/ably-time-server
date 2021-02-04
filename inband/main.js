@@ -1,4 +1,4 @@
-var apiKey = '<YOUR_ABLY_API_KEY>';
+var apiKey = 'YOUR_KEY';
 var ably = new Ably.Realtime({
   key: apiKey,
 });
