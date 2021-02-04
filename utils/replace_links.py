@@ -3,6 +3,14 @@ import re
 
 root_dir = "/Users/tbedford/link-repl/docs/content"
 redirects_file = "/Users/tbedford/Downloads/redirects.tsv"
+#file_ext = ".textile"
+#file_ext = ".md"
+#file_ext = ".code"
+
+# For compare data
+root_dir = "/Users/tbedford/link-repl/docs/data"
+file_ext = "compare.yaml"
+
 
 def open_log (filename):
     print("Opening log file: ", filename)
@@ -23,7 +31,7 @@ def find_files(root):
     md_files = []
     for root, dirs, files in os.walk(root):
         for f in files:
-            if f.endswith(".textile"):
+            if f.endswith(file_ext):
                 md_files.append(os.path.join(root, f))
     return md_files
 
@@ -59,7 +67,7 @@ for f in files:
     source = read_file(f)
     source_in = source
     for link in link_array:
-        regex = r'([\s.,*<:)])'
+        regex = r'([\s.,*<:)"\'])'
         link0 = '(' + re.escape(link[0]) + ')' + regex
         source_out = re.sub(link0, link[1] + r'\2', source_in, re.MULTILINE)
         if source_in != source_out:  # we have made a replacement
