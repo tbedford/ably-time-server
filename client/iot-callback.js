@@ -11,10 +11,8 @@ const options = {
   },
 };
 
-// function(tokenParams, callback(err, tokenOrTokenRequest))
-
 const ably = new require("ably").Realtime({
-  authCallback: function (tokenParams, callback) {
+  authCallback: (tokenParams, callback) => {
     const req = https.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
       if (res.statusCode == 200) {
@@ -47,7 +45,7 @@ ably.connection.on("connected", function () {
   console.log("Connected");
 });
 
-const channel = ably.channels.get("time-server");
+const channel = ably.channels.get("ably-time-server");
 
 channel.subscribe("time", function (message) {
   console.log("Time on server is: " + message.data);

@@ -7,8 +7,8 @@ require("dotenv").config({
 
 const key = process.env.API_KEY;
 const secret = process.env.API_SECRET;
-const ably = new require("ably").Realtime(key + ":" + secret);
-
+const ably = new require("ably").Rest(key + ":" + secret);
+//const ably = new require("ably").Realtime(key + ":" + secret);
 const ttl = 1000 * 60 * 10; // We always set this to 10 minutes
 
 const app = express();
@@ -16,14 +16,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.route("/auth").get(generateToken);
-
 app.route("/auth/:clientId").get(generateToken);
 
 /* Issue token requests to clients sending a request to the /auth endpoint */
 function generateToken(req, res) {
   console.log("Generating TokenRequest...");
 
-  var tokenParams = {};
+  let tokenParams = {};
   tokenParams["ttl"] = ttl;
 
   if (req.params["clientId"]) {
@@ -32,11 +31,11 @@ function generateToken(req, res) {
     tokenParams["clientId"] = clientId;
   }
 
-  ably.auth.createTokenRequest(tokenParams, function (err, tokenRequest) {
+  ably.auth.createTokenRequest(tokenParams, (err, tokenRequest) => {
     if (err) {
       res.status(500).send("Error requesting token: " + JSON.stringify(err));
     } else {
-      const tr = JSON.stringify(tokenRequest);
+      const tr = JSON.stringify(tokenRequest); // need to check whether tokenRequest is already a JSON object
       console.log(tr);
       res.setHeader("Content-Type", "application/json");
       res.send(tr);

@@ -1,6 +1,6 @@
 /*
 
-inband meta events are events that are tiggered in channel (inband). Currently only occupancy events are suported. This means that inband occupancy events are
+inband meta events are events that are triggered in channel (inband). Currently only occupancy events are supported. This means that inband occupancy events are
 triggered if configured to do so. These inband occupancy events have the message name `[meta]occupancy`. 
 
 Inband occupancy events are enabled using channel options, as shown in the code below. 
