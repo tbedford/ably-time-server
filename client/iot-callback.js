@@ -1,9 +1,9 @@
 const https = require("https");
 
 const options = {
-  hostname: "flawless-buttery-legal.glitch.me",
+  hostname: "petal-respected-oriole.glitch.me",
   port: 443,
-  path: "/jwt",  // You can also change this to /auth and it will then work with TokenRequest rather than Ably JWT 
+  path: "/auth",  // You can also change this to /auth and it will then work with TokenRequest rather than Ably JWT 
   method: "GET",
   headers: {
     // will fail if you don't set this
@@ -17,9 +17,10 @@ const ably = new require("ably").Realtime({
       console.log(`statusCode: ${res.statusCode}`);
       if (res.statusCode == 200) {
         res.on("data", (d) => {
-          token = d.toString();
-          token = JSON.parse(token);
-          callback(null, token);
+          tokenRequest = d.toString();
+          tokenRequest = JSON.parse(tokenRequest);
+          console.log(tokenRequest)
+          callback(null, tokenRequest);
         });
       } else {
         console.error("Response code was not 200.");
