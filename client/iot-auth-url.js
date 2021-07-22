@@ -1,13 +1,12 @@
 const Ably = require("ably");
-//const auth_url = "https://flawless-buttery-legal.glitch.me/auth"; // doesn;t work
-const auth_url = "http://localhost:8000/jwt"; // does work, but both auth servers use same code
+const auth_url = "https://petal-respected-oriole.glitch.me/token"; // you can use /jwt or /auth (TokenRequest)
+const auth_headers = {'User-Agent': 'fake'}
+const ably = new Ably.Realtime({authUrl: auth_url, authHeaders: auth_headers});
 
-var ably = new Ably.Realtime({authUrl: auth_url});
-
-ably.connection.on("connecting", function () {
+ably.connection.on("connecting", () => {
   console.log("Connecting to Ably...");
 });
 
-ably.connection.on("connected", function () {
+ably.connection.on("connected", () => {
   console.log("Connected");
 });
