@@ -1,13 +1,16 @@
 const https = require("https");
+require("dotenv").config();
 
 const options = {
-  hostname: "petal-respected-oriole.glitch.me",
+  hostname: "mahogany-gusty-paint.glitch.me",
   port: 443,
-  path: "/auth",  // You can also change this to /auth and it will then work with TokenRequest rather than Ably JWT 
+  path: "/auth", // You can also change this to /auth and it will then work with TokenRequest rather than Ably JWT
   method: "GET",
   headers: {
     // will fail if you don't set this
-    "User-Agent": "IoT client v0.1",
+    "User-Agent": "IoT client v0.2",
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD,
   },
 };
 
@@ -19,12 +22,12 @@ const ably = new require("ably").Realtime({
         res.on("data", (d) => {
           tokenRequest = d.toString();
           tokenRequest = JSON.parse(tokenRequest);
-          console.log(tokenRequest)
+          console.log(tokenRequest);
           callback(null, tokenRequest);
         });
       } else {
         console.error("Response code was not 200.");
-        callback(res.statusCode, null)
+        callback(res.statusCode, null);
       }
     });
 

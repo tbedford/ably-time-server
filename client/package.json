@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "ably": "^1.2.4"
+    "ably": "^1.2.4",
+    "readline": "^1.3.0"
   }
 }

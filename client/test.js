@@ -1,4 +1,4 @@
-var ablyRest = new Ably.Rest("xVLyHw.Ozpisg:eaN0wu95LgwYJnXd");
+var ablyRest = new Ably.Rest("");
 
 var realtime = new Ably.Realtime({
   authCallback: function (tokenParams, callback) {

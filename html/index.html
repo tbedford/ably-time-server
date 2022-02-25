@@ -11,7 +11,7 @@
     <hr />
     <p id="time">Hello</p>
     <script>
-        const ably = new Ably.Realtime({ authUrl: "http://localhost:8000/jwt" });
+        const ably = new Ably.Realtime({ authUrl: "http://localhost:7777/auth" });
         
         ably.connection.on("connected", function () {
             const msg = "Connected to Ably using Auth server.";

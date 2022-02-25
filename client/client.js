@@ -1,5 +1,5 @@
 // simple client that uses TokenRequest for authentication
-var auth_url = "http://localhost:9000/auth";
+var auth_url = "http://localhost:7777/auth";
 
 if (process.argv.length < 3) {
   console.log("You must enter a clientId");
